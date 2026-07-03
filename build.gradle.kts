@@ -1,0 +1,68 @@
+plugins {
+    java
+    application
+    id("org.jetbrains.kotlin.jvm") version "2.1.20"
+    id("org.javamodularity.moduleplugin") version "1.8.15"
+    id("org.openjfx.javafxplugin") version "0.0.13"
+    id("org.beryx.jlink") version "2.25.0"
+}
+
+group = "tessera.toadkeep"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+val junitVersion = "5.12.1"
+
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+application {
+    mainModule.set("tessera.toadkeep.toadkeepii")
+    mainClass.set("tessera.toadkeep.toadkeepii.LauncherKt")
+}
+kotlin {
+    jvmToolchain(21)
+}
+
+tasks.named<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileKotlin") {
+    destinationDirectory.set(tasks.named<JavaCompile>("compileJava").flatMap { it.destinationDirectory })
+}
+
+javafx {
+    version = "21.0.6"
+    modules = listOf("javafx.controls", "javafx.fxml", "javafx.web", "javafx.swing")
+}
+
+dependencies {
+    implementation("org.controlsfx:controlsfx:11.2.1")
+    implementation("com.dlsc.formsfx:formsfx-core:11.6.0") {
+        exclude(group = "org.openjfx")
+    }
+    implementation("net.synedra:validatorfx:0.6.1") {
+        exclude(group = "org.openjfx")
+    }
+    implementation("org.kordamp.ikonli:ikonli-javafx:12.3.1")
+    implementation("eu.hansolo:tilesfx:21.0.9") {
+        exclude(group = "org.openjfx")
+    }
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation(kotlin("stdlib-jdk8"))
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+jlink {
+    imageZip.set(layout.buildDirectory.file("/distributions/app-${javafx.platform.classifier}.zip"))
+    options.set(listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages"))
+    launcher {
+        name = "app"
+    }
+}
