@@ -67,3 +67,17 @@
 .key-space:pressed {
     -fx-background-color: derive(#40a02b, -20%);
 }
+
+.key-completer-toggle {
+    -fx-text-fill: #179299;
+    -fx-font-weight: 500;
+}
+
+.key-completer-toggle:selected {
+    -fx-background-color: #179299;
+    -fx-text-fill: #eff1f5;
+}
+
+.key-completer-toggle:selected:hover {
+    -fx-background-color: derive(#179299, -10%);
+}
