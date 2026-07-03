@@ -10,6 +10,12 @@ module tessera.toadkeep.toadkeepii {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
 
+    requires com.github.kwhat.jnativehook;
+    requires org.freedesktop.dbus;
+    // Unix-socket transport is loaded via ServiceLoader; requiring it keeps it
+    // in the module graph for jlink images.
+    requires org.freedesktop.dbus.transport.jre;
+
     opens tessera.toadkeep.toadkeepii to javafx.fxml;
     exports tessera.toadkeep.toadkeepii;
 }

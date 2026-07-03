@@ -50,6 +50,9 @@ dependencies {
     implementation("eu.hansolo:tilesfx:21.0.9") {
         exclude(group = "org.openjfx")
     }
+    implementation("com.github.kwhat:jnativehook:2.2.2")
+    implementation("com.github.hypfvieh:dbus-java-core:5.1.1")
+    implementation("com.github.hypfvieh:dbus-java-transport-native-unixsocket:5.1.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
     implementation(kotlin("stdlib-jdk8"))
