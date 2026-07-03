@@ -12,6 +12,18 @@ class MainController {
     private var elementText = ""
     private var shifted = false
     public lateinit var keyboardRoot: VBox
+    private lateinit var letterButtons: List<Button>
+
+    @FXML
+    fun initialize() {
+         letterButtons = keyboardRoot.children
+            .filterIsInstance<HBox>()
+            .flatMap { row ->
+                row.children
+                    .filterIsInstance<Button>()
+                    .filter { isLetterButton(it) }
+            }
+    }
 
     @FXML
     private fun onKeyboardButtonClick(event: ActionEvent) {
@@ -35,21 +47,12 @@ class MainController {
             shiftButton.styleClass.add("shift-active")
         }
 
-        for (row in keyboardRoot.children) {
-            if (row is HBox) {
-                for (key in row.children) {
-                    if (key is Button && isLetterButton(key)) {
-                        if (shifted) {
-                            key.text = key.text.lowercase()
-                        }
-                        else {
-                            key.text = key.text.uppercase()
-                        }
-                    }
-                }
-
+        for (key in letterButtons) {
+            key.text = if (shifted) {
+                key.text.lowercase()
+            } else {
+                key.text.uppercase()
             }
-
         }
 
         shifted = !shifted
