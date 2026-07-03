@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox spacing="8.0"
-      style="-fx-background-color: #20242a;"
+      styleClass="keyboard-root"
+      stylesheets="@latte.css"
       xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml"
       fx:id="keyboardRoot"
@@ -17,18 +18,18 @@
     </padding>
 
     <HBox spacing="6.0">
-        <Button text="F1" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F2" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F3" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F4" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F5" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F6" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F7" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F8" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F9" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F10" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F11" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="F12" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #37516b; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
+        <Button text="F1" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F2" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F3" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F4" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F5" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F6" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F7" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F8" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F9" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F10" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F11" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
+        <Button text="F12" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-function" onAction="#onKeyboardButtonClick"/>
     </HBox>
 
     <HBox spacing="6.0">
@@ -45,11 +46,11 @@
         <Button text="0" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="-" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="=" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
-        <Button text="Backspace" prefWidth="96.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
+        <Button text="Backspace" prefWidth="96.0" styleClass="key-modifier" disable="true"/>
     </HBox>
 
     <HBox spacing="6.0">
-        <Button text="Tab" prefWidth="72.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
+        <Button text="Tab" prefWidth="72.0" styleClass="key-modifier" disable="true"/>
         <Button text="Q" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="W" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="E" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
@@ -65,7 +66,7 @@
     </HBox>
 
     <HBox spacing="6.0">
-        <Button text="↑" prefWidth="86.0" onAction="#onShiftButtonClick" style="-fx-background-color: #6b5a37; -fx-text-fill: white;"/>
+        <Button text="↑" prefWidth="86.0" styleClass="key-shift" onAction="#onShiftButtonClick"/>
         <Button text="A" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="S" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="D" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
@@ -78,11 +79,11 @@
         <Button text="Ç" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="~" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="]" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
-        <Button text="Enter" prefWidth="76.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
+        <Button text="Enter" prefWidth="76.0" styleClass="key-modifier" disable="true"/>
     </HBox>
 
     <HBox spacing="6.0">
-        <Button text="Shift" prefWidth="78.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
+        <Button text="Shift" prefWidth="78.0" styleClass="key-modifier" disable="true"/>
         <Button text="\\" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="Z" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="X" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
@@ -95,17 +96,17 @@
         <Button text="." maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text=";" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
         <Button text="/" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#onKeyboardButtonClick"/>
-        <Button text="Shift" prefWidth="92.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
+        <Button text="Shift" prefWidth="92.0" styleClass="key-modifier" disable="true"/>
     </HBox>
 
     <HBox spacing="6.0">
-        <Button text="Ctrl" prefWidth="64.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
-        <Button text="Win" prefWidth="58.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
-        <Button text="Alt" prefWidth="58.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
-        <Button text="Space" maxWidth="Infinity" HBox.hgrow="ALWAYS" style="-fx-background-color: #3d6757; -fx-text-fill: white;" onAction="#onKeyboardButtonClick"/>
-        <Button text="AltGr" prefWidth="66.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
-        <Button text="Win" prefWidth="58.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
-        <Button text="Menu" prefWidth="66.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
-        <Button text="Ctrl" prefWidth="64.0" style="-fx-background-color: #4f5660; -fx-text-fill: white;" disable="true"/>
+        <Button text="Ctrl" prefWidth="64.0" styleClass="key-modifier" disable="true"/>
+        <Button text="Win" prefWidth="58.0" styleClass="key-modifier" disable="true"/>
+        <Button text="Alt" prefWidth="58.0" styleClass="key-modifier" disable="true"/>
+        <Button text="Space" maxWidth="Infinity" HBox.hgrow="ALWAYS" styleClass="key-space" onAction="#onKeyboardButtonClick"/>
+        <Button text="AltGr" prefWidth="66.0" styleClass="key-modifier" disable="true"/>
+        <Button text="Win" prefWidth="58.0" styleClass="key-modifier" disable="true"/>
+        <Button text="Menu" prefWidth="66.0" styleClass="key-modifier" disable="true"/>
+        <Button text="Ctrl" prefWidth="64.0" styleClass="key-modifier" disable="true"/>
     </HBox>
 </VBox>

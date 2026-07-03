@@ -28,6 +28,12 @@ class MainController {
 
     @FXML
     private fun onShiftButtonClick(event: ActionEvent) {
+        val shiftButton = event.source as Button
+        if (shifted) {
+            shiftButton.styleClass.remove("shift-active")
+        } else {
+            shiftButton.styleClass.add("shift-active")
+        }
 
         for (row in keyboardRoot.children) {
             if (row is HBox) {

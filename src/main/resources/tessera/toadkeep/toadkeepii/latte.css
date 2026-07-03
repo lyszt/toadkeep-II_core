@@ -1,0 +1,69 @@
+/* Catppuccin Latte theme. Role assignments documented in DESIGN.md. */
+
+.keyboard-root {
+    -fx-background-color: #eff1f5;
+}
+
+.button {
+    -fx-background-color: #ccd0da;
+    -fx-text-fill: #4c4f69;
+    -fx-background-radius: 6;
+    -fx-border-color: #dce0e8;
+    -fx-border-radius: 6;
+    -fx-font-size: 13px;
+}
+
+.button:hover {
+    -fx-background-color: #bcc0cc;
+}
+
+.button:pressed {
+    -fx-background-color: #acb0be;
+}
+
+.button:focused {
+    -fx-border-color: #7287fd;
+    -fx-border-width: 2;
+}
+
+.key-function {
+    -fx-text-fill: #1e66f5;
+}
+
+/* Disabled on purpose; keep full opacity so the designed colors show. */
+.key-modifier {
+    -fx-background-color: #e6e9ef;
+    -fx-text-fill: #9ca0b0;
+    -fx-opacity: 1.0;
+}
+
+.key-shift {
+    -fx-text-fill: #fe640b;
+}
+
+.key-shift.shift-active {
+    -fx-background-color: #fe640b;
+    -fx-text-fill: #eff1f5;
+}
+
+.key-shift.shift-active:hover {
+    -fx-background-color: derive(#fe640b, -10%);
+}
+
+.key-shift.shift-active:pressed {
+    -fx-background-color: derive(#fe640b, -20%);
+}
+
+.key-space {
+    -fx-background-color: #40a02b;
+    -fx-text-fill: #eff1f5;
+    -fx-font-weight: 500;
+}
+
+.key-space:hover {
+    -fx-background-color: derive(#40a02b, -10%);
+}
+
+.key-space:pressed {
+    -fx-background-color: derive(#40a02b, -20%);
+}
