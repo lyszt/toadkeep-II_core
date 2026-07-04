@@ -54,6 +54,19 @@
     -fx-background-color: derive(#fe640b, -20%);
 }
 
+.missing-key {
+    -fx-background-color: #d20f39;
+    -fx-text-fill: #eff1f5;
+}
+
+.missing-key:hover {
+    -fx-background-color: derive(#d20f39, -10%);
+}
+
+.missing-key:pressed {
+    -fx-background-color: derive(#d20f39, -20%);
+}
+
 .key-space {
     -fx-background-color: #40a02b;
     -fx-text-fill: #eff1f5;

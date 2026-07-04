@@ -69,28 +69,24 @@ object Keymap {
     }
 
     fun push(keyContent: String): String? {
-        val position = getPosition(keyMap, keyContent) ?: return null
-
-        if (contextRoll.isEmpty()) {
-            contextRoll.push(position)
+        val position = getPosition(keyMap, keyContent)
+        if (position == null) {
+            contextRoll.clear()
             return null
         }
 
-        val first = contextRoll.last()
-        val last = position
-        val middleKey = first.second + 1
-
-        if (first.first == last.first && first.second == last.second - 2) {
-            contextRoll.pop()
-            return getKey(first.first, middleKey)
-        }
-        else {
-            if(contextRoll.size >= 2) {
-                contextRoll.removeAt(0)
+        val first = contextRoll.lastOrNull()
+        if (first != null && first.first == position.first) {
+            val gap = position.second - first.second
+            if (gap == 2 || gap == -2) {
+                val middleKey = (first.second + position.second) / 2
+                contextRoll.clear()
+                return getKey(first.first, middleKey)
             }
-            contextRoll.push(position)
         }
 
+        contextRoll.clear()
+        contextRoll.push(position)
         return null
     }
 
