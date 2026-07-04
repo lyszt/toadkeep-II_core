@@ -31,7 +31,7 @@ object Keymap {
     }
 
     fun isLetterButton(button: Button): Boolean {
-        return button.text.length == 1 && button.text[0].isLetter()
+        return button.text.length == 1 && button.text[0].isLetterOrDigit()
     }
 
     fun getPosition(button: Button, keyboardRoot: VBox): Pair<Int, Int>? {
