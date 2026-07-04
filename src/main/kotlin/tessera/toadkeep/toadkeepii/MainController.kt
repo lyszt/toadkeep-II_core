@@ -12,7 +12,9 @@ import javafx.scene.input.Clipboard
 import javafx.scene.input.ClipboardContent
 import javafx.scene.input.MouseButton
 import javafx.scene.layout.VBox
+import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class MainController {
     private var elementText = ""
@@ -20,7 +22,13 @@ class MainController {
     private val typeExecutor = Executors.newSingleThreadExecutor { r ->
         Thread(r, "toadkeep-typer").apply { isDaemon = true }
     }
+    private val chordHoldMs = 120L
     private val missingKeys = mutableSetOf<String>()
+    private val heldKeys = ConcurrentHashMap.newKeySet<Pair<Int, Int>>()
+    private var chordConsumed = false
+    private val chordScheduler = Executors.newSingleThreadScheduledExecutor { r ->
+        Thread(r, "toadkeep-chord").apply { isDaemon = true }
+    }
     public lateinit var keyboardRoot: VBox
     public lateinit var keyCompleterToggle: ToggleButton
     private lateinit var letterButtons: List<Button>
@@ -38,18 +46,50 @@ class MainController {
         GlobalScreen.registerNativeHook()
         GlobalScreen.addNativeKeyListener(object: NativeKeyListener {
             override fun nativeKeyPressed(nativeEvent: NativeKeyEvent) {
-                val key = NativeKeyEvent.getKeyText(nativeEvent.keyCode)
-
-                if(nativeEvent.keyCode == NativeKeyEvent.VC_PAGE_DOWN) {
-                    keyCompleterToggle.selectedProperty().set(!keyCompleterToggle.isSelected)
+                if (nativeEvent.keyCode == NativeKeyEvent.VC_PAGE_DOWN) {
+                    Platform.runLater {
+                        keyCompleterToggle.selectedProperty().set(!keyCompleterToggle.isSelected)
+                    }
                 }
-                val match = Keymap.keyMap.flatten()
-                    .firstOrNull { it.equals(key, ignoreCase = true) } ?: return
-                Platform.runLater { handleKeyType(match) }
+                val pos = positionOf(nativeEvent) ?: return
+                val partner = heldKeys.firstOrNull {
+                    it.first == pos.first && (it.second - pos.second == 2 || it.second - pos.second == -2)
+                }
+                heldKeys.add(pos)
+                if (partner != null && !chordConsumed) {
+                    chordConsumed = true
+                    val middleCol = (partner.second + pos.second) / 2
+                    val middle = Keymap.getKey(pos.first, middleCol) ?: return
+                    chordScheduler.schedule({
+                        if (heldKeys.contains(pos) && heldKeys.contains(partner)) {
+                            Platform.runLater { fireFill(middle) }
+                        }
+                    }, chordHoldMs, TimeUnit.MILLISECONDS)
+                }
             }
-            override fun nativeKeyReleased(e: NativeKeyEvent) { }
+            override fun nativeKeyReleased(e: NativeKeyEvent) {
+                chordConsumed = false
+                val pos = positionOf(e) ?: return
+                heldKeys.remove(pos)
+            }
             override fun nativeKeyTyped(e: NativeKeyEvent) { }
         })
+    }
+
+    private fun positionOf(event: NativeKeyEvent): Pair<Int, Int>? {
+        val key = NativeKeyEvent.getKeyText(event.keyCode)
+        val match = Keymap.keyMap.flatten().firstOrNull { it.equals(key, ignoreCase = true) } ?: return null
+        return Keymap.getPosition(Keymap.keyMap, match)
+    }
+
+    private fun fireFill(middle: String) {
+        if (!keyCompleterToggle.isSelected) return
+        if (middle.lowercase() !in missingKeys) return
+        val out = if (shifted) middle.uppercase() else middle.lowercase()
+        typeExecutor.submit {
+            Thread.sleep(40)
+            replaceSideKeysWith(out)
+        }
     }
 
     @FXML
